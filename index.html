@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+  </head>
+  <script src="main.js" defer></script>
+
+  <body>
+    <!-- Капли blob -->
+    <div class="blob-bg">
+      <div class="shape s1"></div>
+      <div class="shape s2"></div>
+      <div class="shape s3"></div>
+    </div>
+
+    <!-- Метасферы или кляксы -->
+    <div class="lava-lamp">
+      <div class="blob-shape b1"></div>
+      <div class="blob-shape b2"></div>
+      <div class="blob-shape b3"></div>
+    </div>
+
+    <header class="header">
+      <!-- Добавить книгу -->
+      <div class="add-book-container">
+        <input id="title-input" type="text" placeholder="Название" />
+        <input id="author-input" type="text" placeholder="Автор" />
+        <button id="addBook-button">
+          <i class="fi fi-rr-book-plus"></i>
+          <!-- <i class="fi fi-rr-add"></i> -->
+        </button>
+      </div>
+      <!-- Найти книгу -->
+      <div class="search-container">
+        <input id="find-input" type="text" placeholder="Найти книгу" />
+        <button id="find-button">
+          <i class="fi fi-rr-search"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- <i class="fi fi-rr-settings-sliders"></i> -->
+    <!-- <i class="fi fi-rr-book-medical"></i>
+
+    <!-- Список книг, контейнер -->
+    <div id="book-list"></div>
+  </body>
+</html>

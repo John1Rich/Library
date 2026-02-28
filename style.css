@@ -1,0 +1,484 @@
+body {
+  /* внешний отступ */
+  margin: 0;
+  min-height: 100vh;
+  /* background-color: #ff9a9e; Цвет-основа */
+  /* Основной глубокий темный фон */
+  background-color: #2a1b4d;
+
+  /* Создаем "живой" фон из 4-х наслаивающихся радиальных градиентов */
+  /* background-image:
+    radial-gradient(at 0% 0%, rgb(170, 159, 230) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(339, 49%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(339, 49%, 30%, 1) 0, transparent 50%); */
+
+  /* Наслаиваем "пузыри" */
+  background-image: 
+    /* Пурпурный пузырь слева сверху */
+    radial-gradient(at 20% 30%, rgba(138, 43, 226, 0.6) 0px, transparent 50%),
+    /* Розовый большой пузырь в центре */
+    radial-gradient(at 50% 50%, rgba(255, 0, 255, 0.4) 0px, transparent 60%),
+    /* Сине-фиолетовый пузырь справа сверху */
+    radial-gradient(at 80% 20%, rgba(75, 0, 130, 0.8) 0px, transparent 45%),
+    /* Ярко-розовый блик слева снизу */
+    radial-gradient(at 10% 80%, rgba(218, 112, 214, 0.5) 0px, transparent 40%),
+    /* Глубокий синий пузырь справа снизу */
+    radial-gradient(at 90% 90%, rgba(0, 0, 128, 0.6) 0px, transparent 50%);
+
+  /* Чтобы фон не уезжал при скролле */
+  background-attachment: fixed;
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+
+.lava-lamp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Уходит под карточки */
+  background: #1a0b2e; /* Глубокий темный фон как на фото */
+  overflow: hidden;
+}
+
+.blob-shape {
+  position: absolute;
+  filter: blur(20px); /* Мягкие края как на скриншоте */
+  opacity: 0.6;
+  transition: all 1s ease-in-out;
+}
+
+/* Фиолетовая клякса сверху */
+.b1 {
+  width: 600px;
+  height: 500px;
+  background: #8a2be2;
+  top: -10%;
+  left: -5%;
+  /* Неправильная форма: */
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation:
+    float 20s infinite alternate,
+    morph 10s infinite alternate;
+}
+
+/* Розово-пурпурная по центру */
+.b2 {
+  width: 500px;
+  height: 600px;
+  background: #ff00ff;
+  top: 20%;
+  right: -10%;
+  border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+  animation:
+    float 25s infinite alternate-reverse,
+    morph 12s infinite alternate;
+}
+
+/* Темно-синяя снизу */
+.b3 {
+  width: 850px;
+  height: 750px;
+  background: #483d8b;
+  bottom: -5%;
+  left: 20%;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation:
+    float 18s infinite alternate,
+    morph 8s infinite alternate;
+}
+
+/* Плавное перемещение по экрану */
+/* @keyframes float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(100px, 50px) rotate(10deg);
+  }
+  100% {
+    transform: translate(-50px, 150px) rotate(-10deg);
+  }
+} */
+
+/* Изменение формы краев (эффект лавы) */
+/* @keyframes morph {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+  }
+  100% {
+    border-radius: 20% 80% 40% 60% / 40% 60% 40% 60%;
+  }
+} */
+
+/* .blob-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #1a0b2e;
+  filter: blur(20px);
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.s1 {
+  width: 600px;
+  height: 600px;
+  background: #9b30ff;
+  top: -100px;
+  left: -100px;
+  opacity: 0.6;
+}
+
+.s2 {
+  width: 500px;
+  height: 500px;
+  background: #ff1493;
+  bottom: -50px;
+  right: 10%;
+  opacity: 0.4;
+}
+
+.s3 {
+  width: 400px;
+  height: 400px;
+  background: #483d8b;
+  top: 20%;
+  right: -50px;
+  opacity: 0.5;
+} */
+
+.header {
+  display: flex; /* Включаем гибкий контейнер */
+  justify-content: space-between; /* Распределяем группы по краям */
+  align-items: center; /* Выравниваем их по вертикали (центр) */
+  padding: 20px 40px; /* Внутренние отступы */
+}
+
+button {
+  background-color: rgba(255, 255, 255, 0.1); /* Тонкий фон */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  /* border: 1px solid rgba(255, 255, 255, 0.9); */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Светлая грань сверху */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Тень на нижней грани */
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 10px;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+button:hover {
+  cursor: pointer;
+  /* background-color: rgba(210, 210, 228, 0.258); Изменение фона */
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px); /* Кнопка «всплывает» */
+  /* transform: scale(1.05); Увеличение объекта [5] */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+  /* свечение */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  /* тень */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+button:active {
+  transform: translateY(0); /* Эффект нажатия */
+}
+
+.btn-round {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  padding: 0; /* Важно сбросить для идеального круга */
+  flex-shrink: 0; /* Чтобы кнопка не сплющилась */
+}
+
+.fi {
+  color: white;
+  /* Мягкое свечение вместо обычной тени */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+  font-size: 1.2rem;
+  /* Исправляет центрирование внутри кнопки */
+  line-height: 0;
+  /* тень иконок */
+  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); */
+  transition: transform 0.3s ease;
+}
+
+button:hover .fi {
+  transform: scale(1.1); /* Иконка чуть растет при наведении на кнопку */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+}
+
+/* Специальный цвет для кнопки удаления при наведении */
+.deleteBook-button:hover {
+  background: rgba(255, 71, 71, 0.3);
+  border-color: rgba(255, 71, 71, 0.5);
+  /* свечение */
+  box-shadow: 0 0 20px rgba(255, 71, 71, 0.2);
+  /* тень */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Увеличиваю маленькие иконки Назад и Сохранить */
+.fi-rr-arrow-small-left,
+.fi-rr-plus-small {
+  font-size: 1.6rem;
+}
+
+/* Базовые стили заголовка */
+.h3-title {
+  /* margin: 0; */
+  font-size: 1.4rem;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: color 0.3s ease;
+  /* Запрещает выделение текста синим цветом */
+  user-select: none;
+}
+.h3-title:hover {
+  cursor: pointer;
+}
+
+/* Стили автора */
+.p-author {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7); /* Чуть приглушенный белый */
+  font-style: italic;
+  font-size: 0.95rem;
+  cursor: default; /* Обычная стрелка при наведении */
+  /* Запрещает выделение текста синим цветом */
+  user-select: none;
+}
+.p-author:hover {
+  cursor: default;
+}
+
+/* Общие стили для плашки статуса */
+.status-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Статус: ДОСТУПНА (Сочный мятный/зеленый) */
+.status-available .status-badge {
+  background: rgba(46, 213, 115, 0.2); /* Прозрачный зеленый */
+  color: #26ff81; /* Яркий текст */
+  box-shadow: 0 0 15px rgba(46, 213, 115, 0.3);
+}
+
+/* ДОСТУПНА: Мягкий изумрудный отсвет */
+.status-available .h3-title {
+  /* color: #ffffff; */
+  color: #5bf39a; /* Яркий текст */
+  /* text-shadow: 0 0 15px rgba(46, 213, 115, 0.4); */
+  text-shadow: 0 0 10px rgba(46, 213, 115, 0.2);
+}
+
+/* Статус: ВЫДАНА (Мягкий розовый/красный) */
+.status-taken .status-badge {
+  background: rgba(255, 71, 87, 0.2); /* Прозрачный красный */
+  /* color: #ff6b81; */
+  color: #fc3b58;
+  box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+}
+
+/* НА РУКАХ: Мягкий небесный отсвет */
+.status-taken .h3-title {
+  /* color: rgba(255, 255, 255, 0.8); Чуть тусклее, так как книги нет */
+  color: #fa98a6;
+  text-shadow: 0 0 10px rgba(255, 71, 87, 0.2);
+  /* color: #e0f2ff; */
+  /* text-shadow: 0 0 15px rgba(112, 161, 255, 0.4); */
+}
+
+/* Автор: делаем чуть белее, чем было, чтобы не терялся */
+.p-author {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  margin-top: auto; /* Прижмет автора к низу карточки */
+  padding-top: 10px;
+}
+
+/* Маленький индикатор статуса (опционально) */
+/* .status-available::before {
+  content: "● Доступна";
+  font-size: 0.7rem;
+  color: #2ed573;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status-taken::before {
+  content: "● Выдана";
+  font-size: 0.7rem;
+  color: #70a1ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+} */
+
+.add-book-container,
+.search-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+input {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 5px 8px 5px 8px;
+  background: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
+  backdrop-filter: blur(10px); /* Размытие фона за инпутом */
+  -webkit-backdrop-filter: blur(10px);
+  color: white; /* Белый текст */
+  outline: none; /* Убираем стандартную рамку при клике */
+  transition: all 0.3s ease;
+}
+
+/* Эффект при наведении или фокусе */
+input:focus {
+  caret-color: rgb(255, 255, 255);
+  /* background: rgba(255, 255, 255, 0.4); */
+  background: rgba(83, 78, 78, 0.4);
+  border: 1px solid white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+/* Цвет текста подсказки (placeholder) */
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.edit-title-input:focus,
+.edit-author-input:focus {
+  outline: none; /* убираем стандартную рамку */
+  border-bottom: 2px solid; /* можно подчеркнуть активное поле */
+}
+
+#book-list {
+  display: grid;
+  /* Повторяй колонки, заполняя всё пространство. 
+       Минимальная ширина карточки 250px, максимальная  1 часть свободного места */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  /* Расстояние между карточками */
+  gap: 20px;
+  padding: 40px;
+}
+
+.book-card {
+  transition: transform 0.1s ease;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  /* внутренний отсутп */
+  padding: 15px;
+
+  /* Добавим фон и тень, чтобы карточка "ожила" */
+  /* background-color: #f9f9f9; */
+  background: rgba(255, 255, 255, 0.3);
+
+  /* Эффект размытия */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Тень с легким синим оттенком */
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+
+  /* Чтобы содержимое внутри карточки стояло ровно */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
+  position: relative; /* Чтобы подсказка позиционировалась относительно карточки */
+}
+
+.book-card:hover {
+  transform: translateX(0) translateY(0) scale(1.05);
+  z-index: 10;
+  /* Теперь карточка перекроет соседей */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.icon-card {
+  display: flex;
+  gap: 10px;
+}
+
+/* .changeBook-button,
+.deleteBook-button {
+
+} */
+.tooltip-span,
+.tooltip-all-span {
+  /* Прячем изначально */
+  position: absolute;
+  z-index: 100;
+  bottom: 110%; /* Над карточкой */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(0.9);
+  opacity: 0;
+  visibility: hidden;
+  /* Стили стекла для подсказки */
+  background: rgba(50, 50, 50, 0.8);
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  white-space: nowrap; /* Чтобы текст не переносился */
+  transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  pointer-events: none; /* Чтобы подсказка не мешала кликам */
+}
+
+/* Показываем только при наведении на КАРТОЧКУ */
+.tooltip-span,
+.tooltip-all-span {
+  opacity: 1;
+  visibility: visible;
+}
+/* «хвостик» */
+.tooltip-span::after,
+.tooltip-all-span ::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* Внизу блока */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent; /* Цвет должен совпадать с фоном подсказки */
+}
+.tooltip-hidden,
+.tooltip-all-span-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(10px) scale(0.95) !important;
+}
