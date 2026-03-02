@@ -2,7 +2,9 @@
 
 Простое веб-приложение для управления списком книг.
 
-<a href="https://john1rich.github.io/Library/" target="_blank">🌐 Открыть сайт Библиотеки</a>
+---
+
+[**`🌐 Перейти на сайт Библиотеки`**](https://john1rich.github.io/Library/)
 
 ### ✨ Функции:
 
