@@ -4,7 +4,7 @@
 
 ---
 
-[**`🌐 Перейти на сайт Библиотеки`**](https://john1rich.github.io/Library/)
+[**🌐 Перейти на сайт Библиотеки**](https://john1rich.github.io/Library/)
 
 ### ✨ Функции:
 
