@@ -35,7 +35,7 @@ const findBook = document.getElementById("find-button");
 findBook.classList.add("btn-round");
 findBook.title = "Найти книгу";
 
-const findIcon = document.querySelector("fi fi-rr-search");
+const findIcon = document.querySelector(".fi fi-rr-search");
 
 // масиив library = старым сохраненным string, собранным в массив
 // либо library = исходным объктам book, child...
@@ -61,11 +61,14 @@ findBook.addEventListener("click", (event) => {
   updateUI();
 });
 
-const header = document.querySelector("add-book-container");
+const header = document.querySelector(".add-book-container");
 
 // Общая подсказка
 const tooltipAll = document.createElement("span");
 tooltipAll.className = "tooltip-all-span";
+tooltipAll.classList.remove("tooltip-all-span-hidden");
+// tooltipAll.classList.add("tooltip-all-span-hidden");
+// tooltipAll.classList.add("tooltip-all-span-hidden");
 tooltipAll.textContent = "Заполните все поля!";
 
 // Добавление книги
@@ -88,11 +91,25 @@ addBook.addEventListener("click", (event) => {
     updateUI();
     console.log(library);
   } else {
-    // alert("Заполните оба поля!");
+    // Если поля пусты, т.е. нет подсказки, то показываем её
     if (!header.querySelector(".tooltip-all-span")) {
+      // 1. Очищаем старый класс скрытия, чтобы элемент снова стал видимым
+      setTimeout(() => {
+        tooltipAll.classList.remove("tooltip-all-span-hidden");
+      }, 10);
+      // 2. Добавляем в заголовок
       header.appendChild(tooltipAll);
+
+      // 3. Таймер на затухание
+      setTimeout(() => {
+        tooltipAll.classList.add("tooltip-all-span-hidden"); // Плавно скрываем через CSS
+
+        // 4. Таймер на физическое удаление из HTML (после завершения анимации 0.75s)
+        setTimeout(() => {
+          tooltipAll.remove();
+        }, 750);
+      }, 3000);
     }
-    header.appendChild(tooltipAll);
   }
 });
 
@@ -102,7 +119,12 @@ const renderLibrary = (items = library) => {
 
   // Проверка наличия книг в массиве
   if (items.length === 0) {
-    list.innerHTML = "<li>Ничего не найдено</li>";
+    const nothingText = document.createElement("span");
+    // const nothingText = "Ничего не найдено";
+    nothingText.className = "nothing";
+    nothingText.textContent = "Ничего не найдено";
+    list.prepend(nothingText);
+    // list.innerHTML = nothingText;
     return; // Выходим из функции, если список пуст
   }
 
@@ -187,6 +209,10 @@ const renderLibrary = (items = library) => {
         } else {
           if (!card.querySelector(".tooltip-span")) {
             card.appendChild(tooltip);
+            // Устанавливаем таймер
+            setTimeout(() => {
+              tooltipAll.remove();
+            }, 3000);
           }
         }
       };

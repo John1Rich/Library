@@ -283,6 +283,33 @@ button:hover .fi {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.nothing {
+  font-size: 1.2rem;
+  /* Занимает все колонки от начала до конца */
+  grid-column: 1 / -1;
+
+  /* Центрируем сам текст/блок внутри этого пространства */
+  justify-self: center;
+
+  align-items: center;
+  text-align: center;
+  /* font-size: 0.65rem; */
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 20px 40px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* color: #26ff81;  */
+  background: rgba(255, 71, 87, 0.2); /* Прозрачный красный */
+  /* color: #ff6b81; */
+  color: #fc3b58;
+  box-shadow: 0 0 15px rgba(46, 213, 115, 0.3);
+}
+
 /* Статус: ДОСТУПНА (Сочный мятный/зеленый) */
 .status-available .status-badge {
   background: rgba(46, 213, 115, 0.2); /* Прозрачный зеленый */
@@ -351,6 +378,25 @@ button:hover .fi {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+
+/* Отключаем стандартный фон автозаполнения и настраиваем цвет текста */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  /* Убирает желтый/белый фон, заменяя его внутренней тенью под цвет вашего дизайна */
+  -webkit-box-shadow: 0 0 0px 1000px rgba(40, 10, 80, 0.5) inset !important;
+  /* -webkit-box-shadow: 0 0 0px 1000px rgba(83, 78, 78, 0.4) inset !important; */
+
+  /* Устанавливает цвет текста */
+  -webkit-text-fill-color: white !important;
+  /* Плавный переход, чтобы фон не моргал */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Фикс для сохранения эффекта backdrop-filter (размытия) */
+input:-internal-autofill-selected {
+  background-color: transparent !important;
 }
 
 input {
@@ -432,12 +478,7 @@ input::placeholder {
   gap: 10px;
 }
 
-/* .changeBook-button,
-.deleteBook-button {
-
-} */
-.tooltip-span,
-.tooltip-all-span {
+.tooltip-span {
   /* Прячем изначально */
   position: absolute;
   z-index: 100;
@@ -458,9 +499,35 @@ input::placeholder {
   pointer-events: none; /* Чтобы подсказка не мешала кликам */
 }
 
+.tooltip-all-span {
+  /* Прячем изначально */
+  /* position: absolute; */
+  z-index: 100;
+  bottom: 110%; /* Над карточкой */
+  left: 50%;
+  /* transform: translateX(-50%) translateY(10px) scale(0.9); */
+  opacity: 0;
+  visibility: hidden;
+  /* Стили стекла для подсказки */
+  background: rgba(50, 50, 50, 0.8);
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  white-space: nowrap; /* Чтобы текст не переносился */
+  transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  pointer-events: none; /* Чтобы подсказка не мешала кликам */
+  /* Плавность появления/скрытия */
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s ease;
+}
+
 /* Показываем только при наведении на КАРТОЧКУ */
 .tooltip-span,
 .tooltip-all-span {
+  opacity: 1;
   opacity: 1;
   visibility: visible;
 }
@@ -476,9 +543,11 @@ input::placeholder {
   border-style: solid;
   border-color: #333 transparent transparent transparent; /* Цвет должен совпадать с фоном подсказки */
 }
+
 .tooltip-hidden,
 .tooltip-all-span-hidden {
   opacity: 0 !important;
   visibility: hidden !important;
+  pointer-events: none;
   transform: translateY(10px) scale(0.95) !important;
 }
