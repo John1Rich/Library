@@ -1,3 +1,4 @@
+// Локальное хранилище
 const saveToLocalStorage = () => {
   // JSON.stringify(library) массив в string
   // localStorage.setItem сохраняет значение в ключ "library"
@@ -9,33 +10,60 @@ const defaultBooks = [
   {
     title: "Война и мир",
     author: "Толстой",
+    genre: "Роман",
     isAvailable: true,
     isEditing: false,
   },
-  { title: "Детство", author: "Толстой", isAvailable: true, isEditing: false },
-  { title: "Калитка", author: "Папка", isAvailable: true, isEditing: false },
+  {
+    title: "Детство",
+    author: "Толстой",
+    genre: "Повесть",
+    isAvailable: true,
+    isEditing: false,
+  },
+  {
+    title: "Калитка",
+    author: "Папка",
+    genre: "Фантастика",
+    isAvailable: true,
+    isEditing: false,
+  },
   {
     title: "Преступление и наказание",
     author: "Достоевский",
+    genre: "Триллер",
     isAvailable: false,
     isEditing: false,
   },
-  { title: "Треш", author: "Аноним", isAvailable: true, isEditing: false },
+  {
+    title: "Треш",
+    author: "Аноним",
+    genre: "Юмор",
+    isAvailable: true,
+    isEditing: false,
+  },
 ];
 
-const list = document.getElementById("book-list"); // контейнер <ul>
-// Переменные input и button
-const authorInput = document.getElementById("author-input");
-const titleInput = document.getElementById("title-input");
+// Контейнер <ul> для книг
+const list = document.getElementById("book-list");
+
+// Переменные input
+const authorInput = document.getElementById("author-input"); // Input Автор книги
+const titleInput = document.getElementById("title-input"); // Input Название книги
+const genreInput = document.getElementById("genre-input"); // Input Жанр книги
+const findInput = document.getElementById("find-input"); // Input Найти книгу
+
+// Переменные button Добавить книгу
 const addBook = document.getElementById("addBook-button");
 addBook.classList.add("btn-round");
 addBook.title = "Добавить книгу";
-const findInput = document.getElementById("find-input");
+
+// Переменные button Найти книгу
 const findBook = document.getElementById("find-button");
 findBook.classList.add("btn-round");
 findBook.title = "Найти книгу";
 
-const findIcon = document.querySelector(".fi fi-rr-search");
+const findIcon = document.querySelector(".fi fi-rr-search"); // Иконка Найти книгу
 
 // масиив library = старым сохраненным string, собранным в массив
 // либо library = исходным объктам book, child...
@@ -180,18 +208,22 @@ const renderLibrary = (items = library) => {
       // Input при редактировании
       const editTitle = document.createElement("input"); //input для cardTitle
       const editAuthor = document.createElement("input"); //input для cardTitle
+      const editGenre = document.createElement("input"); //input для cardTitle
       editTitle.className = "edit-title-input";
       editAuthor.className = "edit-author-input";
+      editGenre.className = "edit-genre-input";
 
       // Наполняем Input данными
       editTitle.value = element.title; // Вносим текущее название в input
       editAuthor.value = element.author; // Вносим текущего автора в input
+      editGenre.value = element.genre; // Вносим текущий жанр в input
 
-      //Вручную редактируем название и автора книги
+      //Вручную вписываем в Input название, автора и жанр книги...
 
       // Добавляем Input в карточку
       card.appendChild(editTitle);
       card.appendChild(editAuthor);
+      card.appendChild(editGenre);
 
       editTitle.focus(); //срабатывает после официального существования editTitle
 
@@ -199,9 +231,10 @@ const renderLibrary = (items = library) => {
       const applyChanges = () => {
         //проверка пустого названия
         if (editTitle.value.trim() !== "" && editAuthor.value.trim() !== "") {
-          // Обновляем название и автора после редактирования
+          // Обновляем название, автора и жанр после редактирования
           element.title = editTitle.value;
           element.author = editAuthor.value;
+          element.genre = editGenre.value;
           //Выкл. Режим редактирования
           element.isEditing = false;
           saveToLocalStorage();
@@ -221,6 +254,7 @@ const renderLibrary = (items = library) => {
       const cancelBtn = document.createElement("button");
       cancelBtn.className = "cancelBtn";
       cancelBtn.classList.add("btn-round");
+      // Иконка Назад при редактировании
       const cancelIcon = document.createElement("i");
       cancelIcon.className = "fi fi-rr-arrow-small-left";
       cancelIcon.title = "Назад";
@@ -241,11 +275,12 @@ const renderLibrary = (items = library) => {
       const saveBook = document.createElement("button");
       saveBook.className = "saveBook-button";
       saveBook.classList.add("btn-round");
+      // Иконка Сохранить книгу
       const saveIcon = document.createElement("i");
       // saveIcon.className = "fi fi-rr-add";
       saveIcon.className = "fi fi-rr-plus-small";
       saveBook.title = "Сохранить книгу";
-      saveBook.append(saveIcon);
+      saveBook.append(saveIcon); // вносим иконку в кнопку
 
       //Сохранение книги
       saveBook.addEventListener("click", (event) => {
@@ -268,10 +303,16 @@ const renderLibrary = (items = library) => {
       cardAuthor.className = "p-author";
       cardAuthor.textContent = element.author;
 
+      // Жанр книги
+      const cardGenre = document.createElement("p");
+      cardGenre.className = "p-genre"; // тут доработать
+      cardGenre.textContent = element.genre;
+
       // Кнопка Изменить книгу
       const changeBook = document.createElement("button");
       changeBook.className = "changeBook-button";
       changeBook.classList.add("btn-round");
+      // Иконка Изменить книгу
       const changelIcon = document.createElement("i");
       changelIcon.className = "fi fi-rr-file-edit";
       changeBook.title = "Изменить книгу";
@@ -311,6 +352,7 @@ const renderLibrary = (items = library) => {
       cardIcon.appendChild(deleteBook);
       card.appendChild(cardTitle);
       card.appendChild(cardAuthor);
+      card.appendChild(cardGenre);
     }
 
     //Добавляем готовую card в list

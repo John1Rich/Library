@@ -426,7 +426,8 @@ input::placeholder {
 }
 
 .edit-title-input:focus,
-.edit-author-input:focus {
+.edit-author-input:focus,
+.edit-genre-input:focus {
   outline: none; /* убираем стандартную рамку */
   border-bottom: 2px solid; /* можно подчеркнуть активное поле */
 }
